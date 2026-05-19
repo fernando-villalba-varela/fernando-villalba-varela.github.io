@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fernando Villalba · Android Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0e;
+    --bg2: #111116;
+    --bg3: #17171f;
+    --border: #1e1e2a;
+    --border2: #2a2a38;
+    --purple: #7F77DD;
+    --purple-dim: #534AB7;
+    --purple-dark: #1a1825;
+    --text: #f0eeff;
+    --text2: #9896b0;
+    --text3: #555566;
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 48px;
+    background: rgba(10,10,14,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--purple);
+    letter-spacing: 0.04em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    color: var(--text3);
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--bg);
+    background: var(--purple);
+    padding: 8px 18px;
+    border-radius: 8px;
+    transition: opacity 0.2s;
+  }
+
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* SECTIONS */
+  section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 48px;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  section:last-of-type { border-bottom: none; }
+
+  .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--purple);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .label::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+    max-width: 80px;
+  }
+
+  /* HERO */
+  .hero { padding-top: 100px; padding-bottom: 100px; }
+
+  .hero-available {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text2);
+    background: var(--bg3);
+    border: 0.5px solid var(--border2);
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 32px;
+  }
+
+  .hero-available-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #4ade80;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 strong {
+    font-weight: 500;
+    color: var(--purple);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--text2);
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    color: var(--text3);
+    max-width: 520px;
+    line-height: 1.75;
+    margin-bottom: 40px;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-size: 13px;
+    font-weight: 500;
+    background: var(--purple);
+    color: var(--bg);
+    padding: 12px 24px;
+    border-radius: 8px;
+    transition: opacity 0.2s;
+  }
+
+  .btn-primary:hover { opacity: 0.85; }
+
+  .btn-secondary {
+    font-size: 13px;
+    color: var(--text2);
+    background: var(--bg3);
+    border: 0.5px solid var(--border2);
+    padding: 12px 24px;
+    border-radius: 8px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: var(--purple-dim); color: var(--text); }
+
+  /* STACK */
+  .stack-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .badge {
+    font-size: 12px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 0.5px solid var(--border2);
+    color: var(--text3);
+    background: var(--bg2);
+    font-family: var(--mono);
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .badge:hover { border-color: var(--purple-dim); color: var(--text2); }
+
+  .badge.hi {
+    border-color: var(--purple-dim);
+    color: var(--purple);
+    background: var(--purple-dark);
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 600px) { .projects-grid { grid-template-columns: 1fr; } }
+
+  .project-card {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .project-card:hover {
+    border-color: var(--purple-dim);
+    transform: translateY(-2px);
+  }
+
+  .project-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--purple-dark);
+    border: 0.5px solid var(--purple-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .project-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .project-desc {
+    font-size: 13px;
+    color: var(--text3);
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+
+  .project-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 10px;
+    font-family: var(--mono);
+    color: var(--purple);
+    background: var(--purple-dark);
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+
+  .tag-wip {
+    font-size: 10px;
+    font-family: var(--mono);
+    color: #EF9F27;
+    background: #1f1608;
+    border: 0.5px solid #412402;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+
+  .tag-gh {
+    font-size: 10px;
+    font-family: var(--mono);
+    color: var(--text3);
+    background: var(--bg3);
+    border: 0.5px solid var(--border2);
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; }
+
+  .exp-item {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 40px;
+  }
+
+  .exp-item:last-child { padding-bottom: 0; }
+
+  .exp-timeline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 16px;
+    padding-top: 4px;
+  }
+
+  .exp-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--purple);
+    border: 2px solid var(--bg);
+    flex-shrink: 0;
+  }
+
+  .exp-line {
+    width: 1px;
+    background: var(--border2);
+    flex: 1;
+    margin-top: 6px;
+  }
+
+  .exp-item:last-child .exp-line { display: none; }
+
+  .exp-role {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .exp-company {
+    font-size: 13px;
+    color: var(--purple);
+    margin-bottom: 2px;
+  }
+
+  .exp-date {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    margin-bottom: 10px;
+  }
+
+  .exp-clients {
+    font-size: 12px;
+    color: var(--text3);
+    font-style: italic;
+    margin-bottom: 14px;
+  }
+
+  .exp-clients span { color: var(--text2); font-style: normal; }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .exp-bullets li {
+    font-size: 13px;
+    color: var(--text3);
+    line-height: 1.65;
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .exp-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--purple-dim);
+    font-size: 11px;
+    top: 3px;
+  }
+
+  .exp-bullets li strong { color: var(--text2); font-weight: 500; }
+
+  /* CONTACT */
+  .contact-desc {
+    font-size: 15px;
+    color: var(--text3);
+    max-width: 480px;
+    line-height: 1.75;
+    margin-bottom: 32px;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text2);
+    background: var(--bg3);
+    border: 0.5px solid var(--border2);
+    padding: 11px 20px;
+    border-radius: 8px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .contact-link:hover { border-color: var(--purple-dim); color: var(--text); }
+  .contact-link svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
+
+  /* FOOTER */
+  footer {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 0.5px solid var(--border);
+  }
+
+  .footer-text {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+  }
+
+  .footer-dot { color: var(--purple); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero > * {
+    animation: fadeUp 0.6s ease forwards;
+    opacity: 0;
+  }
+
+  .hero > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero > *:nth-child(4) { animation-delay: 0.4s; }
+  .hero > *:nth-child(5) { animation-delay: 0.5s; }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section { padding: 60px 24px; }
+    footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">fernando.dev</span>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#stack">stack</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+  <a href="mailto:villalbavarelafernando@gmail.com" class="nav-cta">Hire me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="about">
+  <div class="hero-available">
+    <span class="hero-available-dot"></span>
+    Open to new Android opportunities · Remote preferred
+  </div>
+  <h1>Android Developer<br><strong>Kotlin &amp; Jetpack Compose</strong></h1>
+  <p class="hero-sub">2+ years · Cádiz, Spain · ALTEN Spain</p>
+  <p class="hero-desc">
+    Building production Android apps for clients like El Corte Inglés, Vodafone and Inditex.
+    Focused on clean architecture, modern UI with Jetpack Compose, and code that scales in real teams.
+  </p>
+  <div class="hero-btns">
+    <a href="#projects" class="btn-primary">View projects</a>
+    <a href="#contact" class="btn-secondary">Get in touch</a>
+  </div>
+</section>
+
+<!-- STACK -->
+<section id="stack">
+  <p class="label">Tech stack</p>
+  <div class="stack-grid">
+    <span class="badge hi">Kotlin</span>
+    <span class="badge hi">Jetpack Compose</span>
+    <span class="badge hi">Android</span>
+    <span class="badge">MVVM</span>
+    <span class="badge">Clean Architecture</span>
+    <span class="badge">Hilt</span>
+    <span class="badge">Room</span>
+    <span class="badge">Retrofit</span>
+    <span class="badge">Coroutines</span>
+    <span class="badge">StateFlow</span>
+    <span class="badge">Firebase</span>
+    <span class="badge">Azure Auth</span>
+    <span class="badge">Material Design 3</span>
+    <span class="badge">JUnit</span>
+    <span class="badge">Mockito</span>
+    <span class="badge">Git</span>
+    <span class="badge">Jira</span>
+    <span class="badge">GitLab</span>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="label">Projects</p>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-icon">📱</div>
+      <p class="project-name">Habit Tracker</p>
+      <p class="project-desc">
+        Android app to build daily habits with streak tracking, monthly activity heatmap built with Canvas in Compose, home screen widget via Glance API and WorkManager reminders.
+      </p>
+      <div class="project-tags">
+        <span class="tag">Compose</span>
+        <span class="tag">Room</span>
+        <span class="tag">Glance</span>
+        <span class="tag">WorkManager</span>
+        <span class="tag-wip">In progress</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-icon">✈️</div>
+      <p class="project-name">FairTrip</p>
+      <p class="project-desc">
+        Trip expense splitter for groups. Track shared costs, assign payers and settle debts easily. Clean Architecture with repository pattern from day one.
+      </p>
+      <div class="project-tags">
+        <span class="tag">Kotlin</span>
+        <span class="tag">MVVM</span>
+        <span class="tag">Clean Arch</span>
+        <span class="tag-gh">GitHub →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="label">Experience</p>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-timeline">
+        <div class="exp-dot"></div>
+        <div class="exp-line"></div>
+      </div>
+      <div>
+        <p class="exp-role">Android Developer</p>
+        <p class="exp-company">ALTEN Spain</p>
+        <p class="exp-date">Apr 2024 – Present · 2 years · Remote</p>
+        <p class="exp-clients">Clients: <span>Grupo Santillana (Unoi · Agenda)</span>, <span>El Corte Inglés</span>, <span>Vodafone Smart Building</span>, <span>Inditex (Stradivarius)</span></p>
+        <ul class="exp-bullets">
+          <li>Migrated <strong>6+ screens from XML to Jetpack Compose</strong> in Santillana's education app used across Latin America — Home, Messages, Notifications, Portfolio and Assessments — delivering one screen per week in a team of 2 Android devs.</li>
+          <li>Built <strong>reusable Compose components</strong> that improved visual consistency and reduced time-to-feature across multiple screens and sprints.</li>
+          <li>Integrated <strong>REST APIs with Retrofit and Coroutines</strong>, ensuring fully async communication without blocking the main thread.</li>
+          <li>Resolved <strong>production incidents</strong> on real-user apps, improving stability, performance and overall user experience under delivery pressure.</li>
+          <li>Implemented <strong>Firebase analytics and cloud services</strong>, and user authentication flows with <strong>Azure Active Directory</strong>.</li>
+          <li>Added new API endpoints and maintained the <strong>El Corte Inglés</strong> Android app, fixing bugs and improving existing features.</li>
+          <li>Integrated new service calls for <strong>Vodafone Smart Building</strong>, adapting quickly to an unfamiliar codebase.</li>
+          <li>Reviewed codebase of <strong>Inditex (Stradivarius)</strong> app — prepared to take on full development and migration work.</li>
+          <li>Worked across <strong>multiple client codebases simultaneously</strong>, adapting to different architectures and team conventions at speed.</li>
+          <li>Applied <strong>Clean Architecture and SOLID principles</strong> consistently to ensure maintainable, testable code across all projects.</li>
+          <li>Used <strong>Jira</strong> for agile task management and <strong>Bitbucket / GitLab</strong> for version control and code reviews.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-timeline">
+        <div class="exp-dot" style="background:var(--text3)"></div>
+      </div>
+      <div>
+        <p class="exp-role">Android Developer Intern</p>
+        <p class="exp-company">ALTEN Spain</p>
+        <p class="exp-date">Apr 2024 – Jun 2024 · 3 months</p>
+        <ul class="exp-bullets">
+          <li>Developed with <strong>Kotlin, Jetpack Compose and XML</strong> from day one in a professional environment.</li>
+          <li>Version control with <strong>Git and GitLab</strong> in a collaborative team setting.</li>
+          <li>Participated in <strong>code reviews</strong> and applied best practices from the start.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="label">Contact</p>
+  <p class="contact-desc">
+    Open to Android Developer roles — remote preferred. If you have an interesting project or opportunity, feel free to reach out.
+  </p>
+  <div class="contact-links">
+    <a href="https://www.linkedin.com/in/fernando-villalba-varela/" target="_blank" class="contact-link">
+      <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+    <a href="https://github.com/fernando-villalba-varela" target="_blank" class="contact-link">
+      <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      GitHub
+    </a>
+    <a href="mailto:villalbavarelafernando@gmail.com" class="contact-link">
+      <svg viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+      Email
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-text">Fernando Villalba Varela <span class="footer-dot">·</span> Android Developer</span>
+  <span class="footer-text">Cádiz, Spain <span class="footer-dot">·</span> 2026</span>
+</footer>
+
+</body>
+</html>
