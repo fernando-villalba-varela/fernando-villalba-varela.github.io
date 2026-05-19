@@ -119,6 +119,26 @@
   /* HERO */
   .hero { padding-top: 100px; padding-bottom: 100px; }
 
+  .hero-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 32px;
+  }
+
+  .hero-left { flex: 1; }
+
+  .hero-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--purple-dim);
+    flex-shrink: 0;
+    filter: grayscale(20%);
+  }
+
   .hero-available {
     display: inline-flex;
     align-items: center;
@@ -129,7 +149,7 @@
     border: 0.5px solid var(--border2);
     padding: 6px 14px;
     border-radius: 20px;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
   }
 
   .hero-available-dot {
@@ -146,11 +166,11 @@
   }
 
   .hero h1 {
-    font-size: clamp(32px, 5vw, 52px);
+    font-size: clamp(28px, 4vw, 48px);
     font-weight: 300;
     line-height: 1.1;
     color: var(--text);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     letter-spacing: -0.02em;
   }
 
@@ -160,19 +180,21 @@
   }
 
   .hero-sub {
-    font-size: 16px;
+    font-size: 15px;
     color: var(--text2);
-    margin-bottom: 28px;
+    margin-bottom: 24px;
     font-weight: 300;
   }
 
   .hero-desc {
-    font-size: 15px;
+    font-size: 14px;
     color: var(--text3);
     max-width: 520px;
-    line-height: 1.75;
-    margin-bottom: 40px;
+    line-height: 1.8;
+    margin-bottom: 16px;
   }
+
+  .hero-desc + .hero-desc { margin-bottom: 36px; }
 
   .hero-btns {
     display: flex;
@@ -205,11 +227,7 @@
   .btn-secondary:hover { border-color: var(--purple-dim); color: var(--text); }
 
   /* STACK */
-  .stack-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
+  .stack-grid { display: flex; flex-wrap: wrap; gap: 8px; }
 
   .badge {
     font-size: 12px;
@@ -279,11 +297,7 @@
     margin-bottom: 16px;
   }
 
-  .project-tags {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
+  .project-tags { display: flex; gap: 6px; flex-wrap: wrap; }
 
   .tag {
     font-size: 10px;
@@ -415,11 +429,7 @@
     margin-bottom: 32px;
   }
 
-  .contact-links {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
+  .contact-links { display: flex; gap: 12px; flex-wrap: wrap; }
 
   .contact-link {
     display: inline-flex;
@@ -468,16 +478,16 @@
   }
 
   .hero > *:nth-child(1) { animation-delay: 0.1s; }
-  .hero > *:nth-child(2) { animation-delay: 0.2s; }
-  .hero > *:nth-child(3) { animation-delay: 0.3s; }
-  .hero > *:nth-child(4) { animation-delay: 0.4s; }
-  .hero > *:nth-child(5) { animation-delay: 0.5s; }
+  .hero > *:nth-child(2) { animation-delay: 0.25s; }
+  .hero > *:nth-child(3) { animation-delay: 0.4s; }
 
   /* MOBILE */
   @media (max-width: 640px) {
     nav { padding: 16px 24px; }
     .nav-links { display: none; }
     section { padding: 60px 24px; }
+    .hero-top { flex-direction: column-reverse; gap: 24px; }
+    .hero-photo { width: 72px; height: 72px; }
     footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
   }
 </style>
@@ -502,12 +512,27 @@
     <span class="hero-available-dot"></span>
     Open to new Android opportunities · Remote preferred
   </div>
-  <h1>Android Developer<br><strong>Kotlin &amp; Jetpack Compose</strong></h1>
-  <p class="hero-sub">2+ years · Cádiz, Spain · ALTEN Spain</p>
+
+  <div class="hero-top">
+    <div class="hero-left">
+      <h1>Android Developer<br><strong>Kotlin &amp; Jetpack Compose</strong></h1>
+      <p class="hero-sub">2+ years · Cádiz, Spain · ALTEN Spain</p>
+    </div>
+    <img src="perfil_fv.jpg" alt="Fernando Villalba" class="hero-photo">
+  </div>
+
   <p class="hero-desc">
-    Building production Android apps for clients like El Corte Inglés, Vodafone and Inditex.
-    Focused on clean architecture, modern UI with Jetpack Compose, and code that scales in real teams.
+    I'm an Android developer with 2+ years of experience building and maintaining production apps
+    for real users — including clients like El Corte Inglés, Vodafone and Inditex. I work daily with
+    Kotlin, Jetpack Compose and Clean Architecture, and I care a lot about code that is readable,
+    testable and easy to maintain.
   </p>
+  <p class="hero-desc">
+    I enjoy migrating legacy XML interfaces to modern Compose, designing clean component APIs, and
+    solving production issues under real delivery pressure. I'm looking for an Android team where I
+    can keep growing — ideally remote, working on a product I can get behind.
+  </p>
+
   <div class="hero-btns">
     <a href="#projects" class="btn-primary">View projects</a>
     <a href="#contact" class="btn-secondary">Get in touch</a>
