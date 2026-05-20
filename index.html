@@ -326,7 +326,10 @@
     border: 0.5px solid var(--border2);
     padding: 3px 9px;
     border-radius: 20px;
+    transition: border-color 0.2s, color 0.2s;
   }
+
+  .tag-gh:hover { border-color: var(--purple-dim); color: var(--text2); }
 
   /* EXPERIENCE */
   .exp-list { display: flex; flex-direction: column; }
@@ -568,20 +571,24 @@
 <section id="projects">
   <p class="label">Projects</p>
   <div class="projects-grid">
+
     <div class="project-card">
-      <div class="project-icon">📱</div>
+      <img src="habit-tracker-icon.png" alt="Habit Tracker" style="width:40px;height:40px;border-radius:10px;margin-bottom:16px;display:block;">
       <p class="project-name">Habit Tracker</p>
       <p class="project-desc">
-        Android app to build daily habits with streak tracking, monthly activity heatmap built with Canvas in Compose, home screen widget via Glance API and WorkManager reminders.
+        Android app to build daily habits with streak tracking, monthly calendar, activity heatmap built with Canvas, home screen widget via Glance API and multiple WorkManager reminders per habit.
       </p>
       <div class="project-tags">
         <span class="tag">Compose</span>
+        <span class="tag">Clean Arch</span>
         <span class="tag">Room</span>
+        <span class="tag">Hilt</span>
         <span class="tag">Glance</span>
         <span class="tag">WorkManager</span>
-        <span class="tag-wip">In progress</span>
+        <a href="https://github.com/fernando-villalba-varela/Habit-Tracker" target="_blank" class="tag-gh">GitHub →</a>
       </div>
     </div>
+
     <div class="project-card">
       <div class="project-icon">✈️</div>
       <p class="project-name">FairTrip</p>
@@ -592,9 +599,10 @@
         <span class="tag">Kotlin</span>
         <span class="tag">MVVM</span>
         <span class="tag">Clean Arch</span>
-        <span class="tag-gh">GitHub →</span>
+        <span class="tag-wip">Coming soon</span>
       </div>
     </div>
+
   </div>
 </section>
 
